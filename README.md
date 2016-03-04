@@ -1,4 +1,4 @@
-# Cricket API Library for Python from Roanuz Cricket API
+# py-cricket Library for Python from Roanuz Cricket API
 Cricket API Library for Python using Roanuz Cricket API's.  Easy to install and simple way to access all Cricket API's. Its a Python library for showing Live Cricket Score, Cricket Schedule and Statistics.
 
 Avialble match and season for testing are,
