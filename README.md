@@ -12,34 +12,33 @@ Avialble match and season for testing are,
 2. Create a Cricket API App [My APP Login](https://www.cricketapi.com/login/?next=/apps/)
 
 3. Import py-cricket and create Authentication using 'RcaFileStorageHandler' or 'RcaStorageHandler' approach. For accessing each API     we need to get the 'AccessToken'
+   
+   ## Example
+   ```rust
+   //Use your Cricket API Application detailas below.
 
+   i). Handler = RcaStorageHandler()
+       start = py-cricket.RcaApp(
+                  "Your_AccessKey", \
+                  "Your_ScreteKey", \
+                  "Your_APP_ID", \
+                  Handler
+               )
 
-## Example
-```rust
-//Use your Cricket API Application detailas below.
+   'OR'
 
-i). Handler = RcaStorageHandler()
-    start = py-cricket.RcaApp(
-               "Your_AccessKey", \
-               "Your_ScreteKey", \
-               "Your_APP_ID", \
-               Handler
-            )
+   ii). Handler = RcaFileStorageHandler()
+        start = py-cricket.RcaApp(
+                   "Your_AccessKey", \
+                   "Your_ScreteKey", \
+                   "Your_App_ID", \
+                   Handler
+                )
+    // After Completing Authentication you can successfully access the API's. For example,  
 
-'OR'
-
-ii). Handler = RcaFileStorageHandler()
-    start = py-cricket.RcaApp(
-               "Your_AccessKey", \
-               "Your_ScreteKey", \
-               "Your_App_ID", \
-               Handler
-            )
-// After Completing Authentication you can successfully access the API's. For example,  
-
-Match API --> 'start.get_match("iplt20_2013_g30") //Return Match information in json format
-Season API --> 'start.get_season("dev_season_2014") //Return Season information in json format
-```  
+    Match API   start.get_match("iplt20_2013_g30") //Return Match information in json format
+    Season API  start.get_season("dev_season_2014") //Return Season information in json format
+    ```  
 
 
 ### Here is List of Roanuz Cricket API's
