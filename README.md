@@ -37,8 +37,8 @@ ii). Handler = RcaFileStorageHandler()
             )
 // After Completing Authentication you can successfully access the API's. For example,  
 
-Match API 'start.get_match("iplt20_2013_g30") --> Return Match information in json format
-Season API 'start.get_season("dev_season_2014")--> Return Season information in json format
+Match API --> 'start.get_match("iplt20_2013_g30") //Return Match information in json format
+Season API --> 'start.get_season("dev_season_2014") //Return Season information in json format
 ```  
 
 
