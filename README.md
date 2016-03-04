@@ -10,15 +10,15 @@ Avialble match and season for testing are,
 1. install py-cricket using 'pip install py-cricket'
 2. Create a Cricket API app in https://www.cricketapi.com/
 3. Import py-cricket and create Authentication using 'RcaFileStorageHandler' or 'RcaStorageHandler' approach. For accessing each API     we need to get the 'AccessToken'
-   Example. Use your Cricket API Applicstion detailas below.
-   i). Handler = RcaStorageHandler()
-       start = py-cricket.RcaApp(
-                 "Your_AccessKey", \
-                 "Your_ScreteKey", \
-                 "Your_APP_ID", \
-                 Handler
-               )
-   'OR'
+Example. Use your Cricket API Applicstion detailas below.
+i). Handler = RcaStorageHandler()
+    start = py-cricket.RcaApp(
+               "Your_AccessKey", \
+               "Your_ScreteKey", \
+               "Your_APP_ID", \
+               Handler
+            )
+'OR'
    ii). Handler = RcaFileStorageHandler()
         start = py-cricket.RcaApp(
                   "Your_AccessKey", \
