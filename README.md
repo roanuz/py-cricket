@@ -35,11 +35,11 @@ ii). Handler = RcaFileStorageHandler()
                "Your_App_ID", \
                Handler
             )
-  
- ```  
- After Completing Authentication you can successfully access the API's. For example,
- Match API 'start.get_match("iplt20_2013_g30") --> Return Match information in json format
- Season API 'start.get_season("dev_season_2014")--> Return Season information in json format
+// After Completing Authentication you can successfully access the API's. For example,  
+
+Match API 'start.get_match("iplt20_2013_g30") --> Return Match information in json format
+Season API 'start.get_season("dev_season_2014")--> Return Season information in json format
+```  
 
 
 ### Here is List of Roanuz Cricket API's
