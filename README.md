@@ -61,3 +61,6 @@ Avialble match and season for testing are,
 
 ## Roanuz Cricket API
 This Library uses the Roanuz Cricket API for fetching cricket scores and stats. Learn more about Litzscore Cricket API on https://www.cricketapi.com/ . Feel free to contact their amazing support team, if you got struck.
+
+###Support
+If you any question, please contact litzscore support support@cricketapi.com
