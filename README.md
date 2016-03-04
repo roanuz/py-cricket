@@ -46,16 +46,16 @@ Avialble match and season for testing are,
 
 ### Here is List of Roanuz Cricket API's
 
-* [Match API](https://www.cricketapi.com/docs/match_api/).  'get_match("match_key")'
-* [Recent Matches API](https://www.cricketapi.com/docs/recent_match_api/).  'get_recent_matches()'
-* [Recent Season API](https://www.cricketapi.com/docs/recent_season_api/).  'get_recent_seasons()'
-* [Schedule API](https://www.cricketapi.com/docs/schedule_api/).  'get_schedule()'
-* [Season API](https://www.cricketapi.com/docs/season_api/).  'get_season("season_key")'
-* [Season Stats API](https://www.cricketapi.com/docs/season_stats_api/).  'get_season_stats("season_key")'
-* [Season Points API](https://www.cricketapi.com/docs/season_points_api/).  'get_season_points("season_key")'
-* [Season Player Stats API](https://www.cricketapi.com/docs/season_player_stats_api/).  'get_season_player_stats("season_key", "player_key")'
-* [Over Summary API](https://www.cricketapi.com/docs/over_summary_api/).  'get_overs_summary("match_key")'
-* [News Aggregation API](https://www.cricketapi.com/docs/news_aggregation_api/).  'get_news_aggregation()'
+* [Match API](https://www.cricketapi.com/docs/match_api/)  start.get_match("match_key")
+* [Recent Matches API](https://www.cricketapi.com/docs/recent_match_api/)  start.get_recent_matches()
+* [Recent Season API](https://www.cricketapi.com/docs/recent_season_api/)  start.get_recent_seasons()
+* [Schedule API](https://www.cricketapi.com/docs/schedule_api/)  start.get_schedule()
+* [Season API](https://www.cricketapi.com/docs/season_api/)  start.get_season("season_key")
+* [Season Stats API](https://www.cricketapi.com/docs/season_stats_api/)  start.get_season_stats("season_key")
+* [Season Points API](https://www.cricketapi.com/docs/season_points_api/)  start.get_season_points("season_key")
+* [Season Player Stats API](https://www.cricketapi.com/docs/season_player_stats_api/)  start.get_season_player_stats("season_key", "player_key")
+* [Over Summary API](https://www.cricketapi.com/docs/over_summary_api/)  start.get_overs_summary("match_key")
+* [News Aggregation API](https://www.cricketapi.com/docs/news_aggregation_api/)  start.get_news_aggregation()
 
 
 
