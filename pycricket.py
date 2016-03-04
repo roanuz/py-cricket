@@ -1,7 +1,37 @@
+#!/usr/bin/env python
+#
+# Copyright 2016  Roanuz Softwares Private Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
 import requests
+import ssl
 import json
+import logging
 from datetime import datetime
+
+# To avoid request library waring uncomment below two line
+# import requests.packages.urllib3
+# requests.packages.urllib3.disable_warnings()
+
 from pycricket_storagehandler import *
+
+logger = logging.getLogger('RcaApp')
+logger.setLevel(logging.ERROR) #Now we handled INFO or ERROR level
+ch = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 
 class RcaApp():
@@ -63,9 +93,12 @@ class RcaApp():
         self.store_handler.set_value("access_token", response['auth']['access_token'])
         self.store_handler.set_value("expires", response['auth']['expires'])
         self.access_token = response['auth']['access_token']
-        # print "set_token" #Debugger
+        logger.info('Getting new access token')
         return True
       else:
+        msg = "Error getting access_token, " + \
+          "please verify your access_key, secret_key and app_id"
+        logger.error(msg)
         raise Exception("Auth Failed, please check your access details")
         return False
 
@@ -83,9 +116,18 @@ class RcaApp():
 
     """
     if(method == "post"):
-      return json.loads(requests.post(url, params=params).text)
+      response_data = json.loads(requests.post(url, params=params).text)
     else:
-      return json.loads(requests.get(url, params=params).text)
+      response_data = json.loads(requests.get(url, params=params).text)
+    
+    if not response_data['status_code'] == 200:
+      if "status_msg" in response_data:
+        logger.error("Bad response: " + response_data['status_msg'])
+      else:
+        logger.error("Some thing went wrong, please check your " + \
+                  "request params Example: card_type and date")
+
+    return response_data
 
   def check_token_active(self):
     """Checking the access token validity.
@@ -104,11 +146,12 @@ class RcaApp():
       if not datetime.now() < datetime.fromtimestamp(float(expire_time)):
         self.store_handler.delete_value("access_token")
         self.store_handler.delete_value("expires")
+        logger.info('Access token expired, going to get new token')
         self.auth()
       else:
         expire_time = self.store_handler.get_value("expires")
         self.access_token = self.store_handler.get_value("access_token")
-        # print "access_token not expired", self.access_token  #Debugger
+        logger.info('Access token noy expired yet')
     else:
       self.auth()
     return True
@@ -219,11 +262,13 @@ class RcaApp():
     response = self.get_response(schedule_url, params)
     return response  
   
-  def get_season(self, season_key):
+  def get_season(self, season_key, card_type="micro_card"):
     """Calling Season API.
 
     Arg:
        season_key: key of the season
+       card_type: optional, default to micro_card. Accepted values are 
+       micro_card & summary_card 
     Return:
        json data
 
@@ -233,6 +278,7 @@ class RcaApp():
     season_url = self.api_path + "season/" + season_key + "/"
     params = {}
     params["access_token"] = self.access_token
+    params["card_type"] = card_type
     response = self.get_response(season_url, params)
     return response
 
@@ -301,6 +347,7 @@ class RcaApp():
     """
     self.check_token_active()
     overs_summary_url = self.api_path + "match/" + match_key + "/overs_summary/"
+    print "overs_summary_url", overs_summary_url
     params = {}
     params["access_token"] = self.access_token
     response = self.get_response(overs_summary_url, params)
