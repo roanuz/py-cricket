@@ -15,14 +15,13 @@
 # under the License.
 
 import requests
-import ssl
 import json
 import logging
 from datetime import datetime
 
 # To avoid request library waring uncomment below two line
-# import requests.packages.urllib3
-# requests.packages.urllib3.disable_warnings()
+import requests.packages.urllib3
+requests.packages.urllib3.disable_warnings()
 
 from pycricket_storagehandler import *
 
