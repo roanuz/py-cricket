@@ -33,24 +33,25 @@ ii). Handler = RcaFileStorageHandler()
                Handler
             )
   
+   
    After Completing Authentication you can successfully access the API's. For example,
-   Match API 'start.get_match("iplt20_2013_g30")
-   Season API 'start.get_season("dev_season_2014")
+   Match API 'start.get_match("iplt20_2013_g30") --> Return Match information in json format
+   Season API 'start.get_season("dev_season_2014")--> Return Season information in json format
 ```
 
-4. Here is List of Roanuz Cricket API
- ```rust
-  Match API  'get_match("match_key")'
-  Recent Matches API  'get_recent_matches()'
-  Recent Season API  'get_recent_seasons()'
-  Schedule API  'get_schedule()'
-  Season API  'get_season("season_key")'
-  Season Stats API  'get_season_stats("season_key")'
-  Season Points API  'get_season_points("season_key")'
-  Season Player Stats API  'get_season_player_stats("season_key", "player_key")'
-  Over Summary API 'get_overs_summary("match_key")'
-  News Aggregation API 'get_news_aggregation()'
-```
+### Here is List of Roanuz Cricket API's
+
+* [Match API](https://www.cricketapi.com/docs/match_api/).  'get_match("match_key")'
+* [Recent Matches API](https://www.cricketapi.com/docs/recent_match_api/).  'get_recent_matches()'
+* [Recent Season API](https://www.cricketapi.com/docs/recent_season_api/).  'get_recent_seasons()'
+* [Schedule API](https://www.cricketapi.com/docs/schedule_api/).  'get_schedule()'
+* [Season API](https://www.cricketapi.com/docs/season_api/).  'get_season("season_key")'
+* [Season Stats API](https://www.cricketapi.com/docs/season_stats_api/).  'get_season_stats("season_key")'
+* [Season Points API](https://www.cricketapi.com/docs/season_points_api/).  'get_season_points("season_key")'
+* [Season Player Stats API](https://www.cricketapi.com/docs/season_player_stats_api/).  'get_season_player_stats("season_key", "player_key")'
+* [Over Summary API](https://www.cricketapi.com/docs/over_summary_api/).  'get_overs_summary("match_key")'
+* [News Aggregation API](https://www.cricketapi.com/docs/news_aggregation_api/).  'get_news_aggregation()'
+
 
 
 ## Roanuz Cricket API
