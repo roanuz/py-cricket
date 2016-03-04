@@ -1,6 +1,5 @@
-# 'py-cricket' Library for Python
-#From Roanuz Cricket API
-py-cricket Library for Python using Roanuz Cricket API's.  Easy to install and simple way to access all Cricket API's. Its a Python library for showing Live Cricket Score, Cricket Schedule and Statistics.
+# py-cricket library for Roanuz Cricket API
+py-cricket library for Python using Roanuz Cricket API's.  Easy to install and simple way to access all Roanuz Cricket API's. Its a Python library for showing Live Cricket Score, Cricket Schedule and Statistics.
 
 Avialble match and season for testing are,
 * `[match key ="iplt20_2013_g30"]`
@@ -8,37 +7,39 @@ Avialble match and season for testing are,
 
 
 ## Get Started
-1. install py-cricket using 'pip install py-cricket'
+1. install py-cricket using `pip install py-cricket`
 
-2. Create a Cricket API App [My APP Login](https://www.cricketapi.com/login/?next=/apps/)
+2. Create a Cricket API App here [My APP Login](https://www.cricketapi.com/login/?next=/apps/)
 
 3. Import py-cricket and create Authentication using 'RcaFileStorageHandler' or 'RcaStorageHandler' approach. For accessing each API     we need to get the 'AccessToken'
    
    ## Example
    ```rust
    //Use your Cricket API Application detailas below.
-
-   i). Handler = RcaStorageHandler()
-       start = py-cricket.RcaApp(
-                  "Your_AccessKey", \
-                  "Your_ScreteKey", \
-                  "Your_APP_ID", \
-                  Handler
-               )
+   
+   //RcaStorageHandler
+   import py-cricket
+   handler = RcaStorageHandler()
+   start = py-cricket.RcaApp("Your_AccessKey", \
+                              "Your_ScreteKey", \
+                              "Your_APP_ID", \
+                              handler
+                           )
 
    'OR'
-
-   ii). Handler = RcaFileStorageHandler()
-        start = py-cricket.RcaApp(
-                   "Your_AccessKey", \
-                   "Your_ScreteKey", \
-                   "Your_App_ID", \
-                   Handler
-                )
+   
+   //RcaFileStorageHandler
+   handler = RcaFileStorageHandler()
+   start = py-cricket.RcaApp("Your_AccessKey", \
+                              "Your_ScreteKey", \
+                              "Your_App_ID", \
+                              handler
+                           )
+                           
     // After Completing Authentication you can successfully access the API's. For example,  
 
-    Match API   start.get_match("iplt20_2013_g30") //Return Match information in json format
-    Season API  start.get_season("dev_season_2014") //Return Season information in json format
+    start.get_match("iplt20_2013_g30") //Return Match information in json format
+    start.get_season("dev_season_2014") //Return Season information in json format
     ```  
 
 
