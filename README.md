@@ -4,6 +4,7 @@ py-cricket library for Python using Roanuz Cricket API's.  Easy to install and s
 Avialble match and season for testing are,
 * `[match key ="iplt20_2013_g30"]`
 * `[season key="dev_season_2014"]`
+*  [more free API's](https://www.cricketapi.com/docs/freeapi/)
 
 
 ## Get Started
