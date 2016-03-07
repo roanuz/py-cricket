@@ -19,7 +19,7 @@ Avialble match and season for testing are,
    //Use your Cricket API Application detailas below.
    
    //RcaStorageHandler
-   import py-cricket
+   import pycricket
    handler = RcaStorageHandler()
    start = py-cricket.RcaApp("Your_AccessKey", \
                               "Your_ScreteKey", \
