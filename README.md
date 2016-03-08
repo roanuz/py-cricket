@@ -21,20 +21,20 @@ Avialble match and season for testing are,
    //RcaStorageHandler
    import pycricket
    handler = RcaStorageHandler()
-   start = py-cricket.RcaApp("Your_AccessKey", \
-                              "Your_ScreteKey", \
-                              "Your_APP_ID", \
-                              handler
+   start = pycricket.RcaApp("Your_AccessKey", \
+                            "Your_ScreteKey", \
+                            "Your_APP_ID", \
+                            handler
                            )
 
    'OR'
    
    //RcaFileStorageHandler
    handler = RcaFileStorageHandler()
-   start = py-cricket.RcaApp("Your_AccessKey", \
-                              "Your_ScreteKey", \
-                              "Your_App_ID", \
-                              handler
+   start = pycricket.RcaApp("Your_AccessKey", \
+                            "Your_ScreteKey", \
+                            "Your_App_ID", \
+                            handler
                            )
                            
     // After Completing Authentication you can successfully access the API's. For example,  
