@@ -20,7 +20,7 @@ Avialble match and season for testing are,
    
    //RcaStorageHandler
    import pycricket
-   handler = RcaStorageHandler()
+   handler = pycricket.RcaStorageHandler()
    start = pycricket.RcaApp("Your_AccessKey", \
                             "Your_ScreteKey", \
                             "Your_APP_ID", \
@@ -30,7 +30,7 @@ Avialble match and season for testing are,
    'OR'
    
    //RcaFileStorageHandler
-   handler = RcaFileStorageHandler()
+   handler = pycricket.RcaFileStorageHandler()
    start = pycricket.RcaApp("Your_AccessKey", \
                             "Your_ScreteKey", \
                             "Your_App_ID", \
