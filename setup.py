@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name = 'py-cricket',
-    version = '1.0.1',
+    version = '1.0.2',
     description = 'Easy to install and simple way to access all Roanuz Cricket APIs. Its a library for showing Live Cricket Score, Cricket Schedule and Statistics',
     author = 'Roanuz Softwares Private Ltd',
     author_email = 'contact@roanuz.com',

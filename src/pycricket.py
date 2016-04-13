@@ -61,6 +61,7 @@ class RcaApp():
       new_id = store_handler.new_device_id()
     store_handler.set_value("device_id", new_id)
     self.device_id = new_id
+    self.auth()
 
   def auth(self):
     """Auth is used to call the AUTH API of CricketAPI.
