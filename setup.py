@@ -9,7 +9,7 @@ setup(
     url = 'https://github.com/roanuz/py-cricket',
     package_dir={'': 'src'},
     packages=[''],
-    install_requires=['requests==2.5.1'],
+    install_requires=['requests>=2.5.1'],
     entry_points='''
         [console_scripts]
         pycricket=src.pycricket:RcaApp
