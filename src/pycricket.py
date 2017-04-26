@@ -15,8 +15,8 @@
 # under the License.
 
 import requests
-import json
 import logging
+import os
 from datetime import datetime
 from pycricket_storagehandler import *
 
@@ -35,49 +35,67 @@ logger.addHandler(ch)
 
 class RcaApp():
     """
-    The RcaApp class will be containg various funtion to access
-    the defferent CricketAPI API's.
+    The RcaApp class will be containing various function to access
+    the different CricketAPI API's.
     """
 
-    def __init__(self, access_key, secret_key, app_id, store_handler, device_id=None):
-        """
-        initialzing user Cricket API app details.
+    def __init__(self, access_key=None, secret_key=None, app_id=None, store_handler=None, device_id=None):
+        """ 
+        initializing user Cricket API app details.
         Arg:
-        access_key : Cricket API APP access_key
-        secret_key : Cricket API APP secret_key
-        store_handler : RcaStorageHandler/RcaFileStorageHandler object name
-        device_id : User device_id
+            access_key : Cricket API APP access_key
+            secret_key : Cricket API APP secret_key
+            store_handler : RcaStorageHandler/RcaFileStorageHandler object name
+            device_id : User device_id
 
         """
-        self.access_key = access_key
-        self.secret_key = secret_key
-        self.app_id = app_id
-        self.store_handler = store_handler
+        if access_key:
+            self.access_key = access_key
+        elif os.environ.get("RCA_ACCESS_KEY"):
+            self.access_key = os.environ.get("RCA_ACCESS_KEY")
+        else:
+            raise Exception("access key is required.!! Try again")
+
+        if secret_key:
+            self.secret_key = secret_key
+        elif os.environ.get("RCA_SECRET_KEY"):
+            self.secret_key = os.environ.get("RCA_SECRET_KEY")
+        else:
+            raise Exception("secret key is required.!! Try again")
+
+        if app_id:
+            self.app_id = app_id
+        elif os.environ.get("RCA_APP_ID"):
+            self.app_id = os.environ.get("RCA_APP_ID")
+        else:
+            raise Exception("app id is required.!! try again")
+
+        if store_handler:
+            self.store_handler = store_handler
+        else:
+            self.store_handler = RcaStorageHandler()
+
         self.api_path = "https://rest.cricketapi.com/rest/v2/"
         if device_id:
             new_id = device_id
         else:
-            new_id = store_handler.new_device_id()
-        store_handler.set_value("device_id", new_id)
+            new_id = self.store_handler.new_device_id()
+        self.store_handler.set_value("device_id", new_id)
         self.device_id = new_id
         self.auth()
 
     def auth(self):
         """
         Auth is used to call the AUTH API of CricketAPI.
-        Aceestoken required for every request call to CricketAPI.
-        Auth fuctional will post user Cricket API app details to server
+       
+        Access token required for every request call to CricketAPI.
+        Auth functional will post user Cricket API app details to server
         and return the access token.
 
-
         Return:
-        Aceestoken
+            Access token    
         """
-        if(self.store_handler.has_value('access_token')):
-            self.access_token = self.store_handler.get_value('access_token')
-            # print "get_access_token", self.access_token  #Debugger
-            return True
-        else:
+        if not self.store_handler.has_value('access_token'):
             params = {}
             params["access_key"] = self.access_key
             params["secret_key"] = self.secret_key
@@ -86,52 +104,53 @@ class RcaApp():
             auth_url = self.api_path + "auth/"
             response = self.get_response(auth_url, params, "post")
 
-        if 'auth' in response:
-            self.store_handler.set_value("access_token", response['auth']['access_token'])
-            self.store_handler.set_value("expires", response['auth']['expires'])
-            self.access_token = response['auth']['access_token']
-            logger.info('Getting new access token')
-            return True
-        else:
-            msg = "Error getting access_token, " + \
-                "please verify your access_key, secret_key and app_id"
-            logger.error(msg)
-            raise Exception("Auth Failed, please check your access details")
-            return False
+            if 'auth' in response:
+                self.store_handler.set_value("access_token", response['auth']['access_token'])
+                self.store_handler.set_value("expires", response['auth']['expires'])
+                logger.info('Getting new access token')
+            else:
+                msg = "Error getting access_token, " + \
+                      "please verify your access_key, secret_key and app_id"
+                logger.error(msg)
+                raise Exception("Auth Failed, please check your access details")
 
-    def get_response(self, url, params="", method="get"):
+    def get_response(self, url, params={}, method="get"):
         """
         It will return json response based on given url, params and methods.
-        Arg:
-        params: 'dictionary'
-        url: 'url' formate
-        method: default 'get', support method 'post'
+    
+        Arg:    
+           params: 'dictionary'
+           url: 'url' format
+           method: default 'get', support method 'post' 
         Return:
-        json data
+           json data    
         """
-        if(method == "post"):
+
+        if method == "post":
             response_data = json.loads(requests.post(url, params=params).text)
         else:
+            params["access_token"] = self.get_active_token()
             response_data = json.loads(requests.get(url, params=params).text)
 
         if not response_data['status_code'] == 200:
             if "status_msg" in response_data:
                 logger.error("Bad response: " + response_data['status_msg'])
             else:
-                logger.error("Some thing went wrong, please check your " +
+                logger.error("Some thing went wrong, please check your " + \
                              "request params Example: card_type and date")
 
         return response_data
 
-    def check_token_active(self):
+    def get_active_token(self):
         """
-        Checking the access token validity.
-        Access token expires every 24 hours, It will expires then it will
-        generate a new token.
+        Getting the valid access token.
 
+           Access token expires every 24 hours, It will expires then it will
+           generate a new token.
         Return:
-        True (always)
+           active access token 
         """
+
         expire_time = self.store_handler.has_value("expires")
         access_token = self.store_handler.has_value("access_token")
         if expire_time and access_token:
@@ -142,29 +161,25 @@ class RcaApp():
                 logger.info('Access token expired, going to get new token')
                 self.auth()
             else:
-                expire_time = self.store_handler.get_value("expires")
-                self.access_token = self.store_handler.get_value("access_token")
                 logger.info('Access token noy expired yet')
         else:
             self.auth()
-            return True
+        return self.store_handler.get_value("access_token")
 
     def get_match(self, match_key, card_type="full_card"):
         """
         Calling the Match API.
-
+    
         Arg:
-            match_key: key of the match
-            card_type: optional, default to full_card. Accepted values are
-            micro_card, summary_card & full_card.
-
+           match_key: key of the match
+           card_type: optional, default to full_card. Accepted values are 
+           micro_card, summary_card & full_card.
         Return:
-            json data
+           json data   
         """
-        self.check_token_active()
+
         match_url = self.api_path + "match/" + match_key + "/"
         params = {}
-        params["access_token"] = self.access_token,
         params["card_type"] = card_type
         response = self.get_response(match_url, params)
         return response
@@ -174,19 +189,32 @@ class RcaApp():
         Calling the Recent Matches API.
 
         Arg:
-            card_type: optional, default to micro_card. Accepted values are
-            micro_card & summary_card.
-
+           card_type: optional, default to micro_card. Accepted values are
+           micro_card & summary_card.
         Return:
-            json data
-    """
+           json data
+        """
 
-        self.check_token_active()
         recent_matches_url = self.api_path + "recent_matches/"
         params = {}
-        params["access_token"] = self.access_token,
         params["card_type"] = card_type
         response = self.get_response(recent_matches_url, params)
+        return response
+
+    def get_ball_by_ball(self, match_key, over_key=None):
+        """
+        match_key: key of the match
+        over_key : key of the over
+    
+        Return:
+           json data:    
+        """
+
+        if over_key:
+            ball_by_ball_url = "{base_path}match/{match_key}/balls/{over_key}/".format(base_path=self.api_path, match_key=match_key, over_key=over_key)
+        else:
+            ball_by_ball_url = "{base_path}match/{match_key}/balls/".format(base_path=self.api_path, match_key=match_key)
+        response = self.get_response(ball_by_ball_url)
         return response
 
     def get_recent_season_matches(self, season_key):
@@ -194,15 +222,13 @@ class RcaApp():
         Calling specific season recent matches.
 
         Arg:
-            season_key: key of the season.
+           season_key: key of the season.
         Return:
-            json date
+           json date
         """
-        self.check_token_active()
+
         season_recent_matches_url = self.api_path + "season/" + season_key + "/recent_matches/"
-        params = {}
-        params["access_token"] = self.access_token,
-        response = self.get_response(season_recent_matches_url, params)
+        response = self.get_response(season_recent_matches_url)
         return response
 
     def get_recent_seasons(self):
@@ -210,13 +236,11 @@ class RcaApp():
         Calling the Recent Season API.
 
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         recent_seasons_url = self.api_path + "recent_seasons/"
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(recent_seasons_url, params)
+        response = self.get_response(recent_seasons_url)
         return response
 
     def get_schedule(self, date=None):
@@ -224,12 +248,11 @@ class RcaApp():
         Calling the Schedule API.
 
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         schedule_url = self.api_path + "schedule/"
         params = {}
-        params["access_token"] = self.access_token
         if date:
             params['date'] = date
         response = self.get_response(schedule_url, params)
@@ -237,18 +260,16 @@ class RcaApp():
 
     def get_season_schedule(self, season_key):
         """
-        Calling sepecific season schedule
+        Calling specific season schedule
 
         Arg:
-        season_key: key of the season
+           season_key: key of the season
         Return:
-        json data
+           json data
         """
-        self.check_token_active()
+
         schedule_url = self.api_path + "season/" + season_key + "/schedule/"
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(schedule_url, params)
+        response = self.get_response(schedule_url)
         return response
 
     def get_season(self, season_key, card_type="micro_card"):
@@ -256,16 +277,15 @@ class RcaApp():
         Calling Season API.
 
         Arg:
-            season_key: key of the season
-            card_type: optional, default to micro_card. Accepted values are
-            micro_card & summary_card
+           season_key: key of the season
+           card_type: optional, default to micro_card. Accepted values are 
+           micro_card & summary_card 
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         season_url = self.api_path + "season/" + season_key + "/"
         params = {}
-        params["access_token"] = self.access_token
         params["card_type"] = card_type
         response = self.get_response(season_url, params)
         return response
@@ -275,15 +295,13 @@ class RcaApp():
         Calling Season Stats API.
 
         Arg:
-            season_key: key of the season
+           season_key: key of the season
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         season_stats_url = self.api_path + "season/" + season_key + "/stats/"
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(season_stats_url, params)
+        response = self.get_response(season_stats_url)
         return response
 
     def get_season_points(self, season_key):
@@ -291,15 +309,13 @@ class RcaApp():
         Calling Season Points API.
 
         Arg:
-            season_key: key of the season
+           season_key: key of the season
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         season_points_url = self.api_path + "season/" + season_key + "/points/"
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(season_points_url, params)
+        response = self.get_response(season_points_url)
         return response
 
     def get_season_player_stats(self, season_key, player_key):
@@ -307,16 +323,14 @@ class RcaApp():
         Calling Season Player Stats API.
 
         Arg:
-            season_key: key of the season
-            player_key: key of the player
+           season_key: key of the season
+           player_key: key of the player
         Return:
-            json data
+           json data
         """
-        self.check_token_active()
+
         season_player_stats_url = self.api_path + "season/" + season_key + "/player/" + player_key + "/stats/"
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(season_player_stats_url, params)
+        response = self.get_response(season_player_stats_url)
         return response
 
     def get_overs_summary(self, match_key):
@@ -324,19 +338,13 @@ class RcaApp():
         Calling Overs Summary API
 
         Arg:
-            match_key: key of the match
+           match_key: key of the match
         Return:
-            json data
-
-
-
+           json data
         """
-        self.check_token_active()
         overs_summary_url = self.api_path + "match/" + match_key + "/overs_summary/"
         print "overs_summary_url", overs_summary_url
-        params = {}
-        params["access_token"] = self.access_token
-        response = self.get_response(overs_summary_url, params)
+        response = self.get_response(overs_summary_url)
         return response
 
     def get_news_aggregation(self):
@@ -344,11 +352,9 @@ class RcaApp():
         Calling News Aggregation API
 
         Return:
-        json data
+           json data
         """
-        self.check_token_active()
+
         news_aggregation_url = self.api_path + "news_aggregation" + "/"
-        params = {}
-        params["access_token"] = self.access_token,
-        response = self.get_response(news_aggregation_url, params)
+        response = self.get_response(news_aggregation_url)
         return response
