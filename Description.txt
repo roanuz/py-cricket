@@ -6,7 +6,7 @@ py-cricket library for Roanuz Cricket API
 -----------------------------------------
         Its a python library to get cricket scores,schedule and statistics from [Roanuz CricketAPI](https://www.cricketapi.com).Its easy to access with the access key,secret key and app id.
 
-Change List:
+Changes List:
 ------------
     1.0.3:
         1.Access key, secret key and app id can also be accessed through Environmental variables.
@@ -22,7 +22,7 @@ Getting started:
 
     2. Create a Cricket API App here [My APP Login](https://www.cricketapi.com/login/?next=/apps/)
 
-    3.Import py-cricket and create Authentication using 'RcaFileStorageHandler' or 'RcaStorageHandler' approach.
+    3. Import py-cricket and create Authentication using 'RcaFileStorageHandler' or 'RcaStorageHandler' approach.
 
 To check all our API's please visit : https://github.com/roanuz/py-cricket
 

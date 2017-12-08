@@ -39,7 +39,7 @@ class RcaApp():
     the different CricketAPI API's.
     """
 
-    def __init__(self, access_key=None, secret_key=None, app_id=None, store_handler=None, device_id=None):
+    def __init__(self, access_key, secret_key, app_id, store_handler, device_id=None):
         """ 
         initializing user Cricket API app details.
         Arg:

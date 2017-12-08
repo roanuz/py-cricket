@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 with open('Description.txt') as file:
     long_description = file.read()
@@ -14,9 +14,10 @@ setup(
     url = 'https://github.com/roanuz/py-cricket',
     package_dir={'': 'src'},
     packages=[''],
+    data_files=['Description.txt'],
     install_requires=['requests>=2.5.1'],
-    entry_points='''
-        [console_scripts]
-        pycricket=src.pycricket:RcaApp
-    '''
+    entry_points={
+        'console_scripts':
+        ['pycricket=src.pycricket:RcaApp']
+    }
 )
