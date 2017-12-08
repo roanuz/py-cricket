@@ -1,4 +1,4 @@
 To update new version run the below two commends
 
-python setup.py register
+create a .pypirc file and enter the details
 python setup.py sdist upload

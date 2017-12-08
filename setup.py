@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('Description.txt') as file:
     long_description = file.read()
@@ -13,8 +13,8 @@ setup(
     author_email = 'contact@roanuz.com',
     url = 'https://github.com/roanuz/py-cricket',
     package_dir={'': 'src'},
-    packages=[''],
-    data_files=['Description.txt'],
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=['requests>=2.5.1'],
     entry_points={
         'console_scripts':
