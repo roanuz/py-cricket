@@ -18,7 +18,7 @@ import requests
 import logging
 import os
 from datetime import datetime
-from src.pycricket_storagehandler import *
+from pycricket_storagehandler import *
 
 # To avoid request library waring uncomment below two line
 import requests.packages.urllib3
