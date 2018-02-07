@@ -18,7 +18,7 @@ import requests
 import logging
 import os
 from datetime import datetime
-from pycricket_storagehandler import *
+from src.pycricket_storagehandler import *
 
 # To avoid request library waring uncomment below two line
 import requests.packages.urllib3
@@ -343,7 +343,7 @@ class RcaApp():
            json data
         """
         overs_summary_url = self.api_path + "match/" + match_key + "/overs_summary/"
-        print "overs_summary_url", overs_summary_url
+        print("overs_summary_url", overs_summary_url)
         response = self.get_response(overs_summary_url)
         return response
 
