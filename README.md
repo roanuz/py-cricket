@@ -37,8 +37,8 @@ py-cricket library for Python using Roanuz Cricket API's.  Easy to install and s
 
     // After Completing Authentication you can successfully access the API's.
 
-    start.get_match("iplt20_2016_g30") //Return Match information in json format
-    start.get_season("dev_season_2016") //Return Season information in json format
+    start.get_match("iplt20_2013_g30") //Return Match information in json format
+    start.get_season("dev_season_2014") //Return Season information in json format
     For more free API's visit : https://www.cricketapi.com/docs/freeapi/
     ```
 
@@ -58,7 +58,8 @@ py-cricket library for Python using Roanuz Cricket API's.  Easy to install and s
 * [News Aggregation API](https://www.cricketapi.com/docs/news_aggregation_api/)  start.get_news_aggregation()
 
  ## Roanuz Cricket API 
-	This Library uses the Roanuz Cricket API for fetching cricket scores and stats. Learn more about Litzscore Cricket API on https://www.cricketapi.com/ 
+	This Library uses the Roanuz Cricket API for fetching cricket scores and stats.
+    Learn more about Litzscore Cricket API on https://www.cricketapi.com/ 
 
  ## Contact:
     Feel free to call us anytime, We have an amazing team to support you.
