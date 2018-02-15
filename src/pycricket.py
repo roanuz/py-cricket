@@ -201,6 +201,19 @@ class RcaApp():
         response = self.get_response(recent_matches_url, params)
         return response
 
+    def get_player_stats(self, player_key, board_key):
+        """
+        Calling the Player Stats API
+        Args:
+            player_key: Key of the player
+            board_key: key of the board
+        Return:
+            json data
+        """
+        player_stats_url = self.api_path + 'player/' + player_key + '/league/' + board_key + '/stats/'
+        response = self.get_response(player_stats_url)
+        return response
+
     def get_ball_by_ball(self, match_key, over_key=None):
         """
         match_key: key of the match
@@ -302,6 +315,20 @@ class RcaApp():
 
         season_stats_url = self.api_path + "season/" + season_key + "/stats/"
         response = self.get_response(season_stats_url)
+        return response
+
+    def get_season_team(self, season_key, season_team_key,stats_type=None):
+        """
+        Calling Season teams API
+
+        Arg:
+            season_key: key of the season
+        Return:
+            json data
+        """
+        params = {"stats_type": stats_type}
+        season_team_url = self.api_path + 'season/' +  season_key + '/team/' + season_team_key + '/'
+        response = self.get_response(season_team_url, params=params)
         return response
 
     def get_season_points(self, season_key):

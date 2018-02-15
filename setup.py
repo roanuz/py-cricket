@@ -5,7 +5,7 @@ with open('Description.txt') as file:
 
 setup(
     name='py-cricket',
-    version='1.0.5',
+    version='1.0.7',
     description = 'Easy to install and simple way to access all Roanuz Cricket APIs. Its a library 	for showing Live Cricket Score, Cricket Schedule and Statistics',
     long_description = long_description,
 

@@ -8,6 +8,10 @@ py-cricket library for Roanuz Cricket API
 
 Changes List:
 ---------------------------
+    1.0.7:
+        1.Added Player Stats API
+    1.0.6:
+        1.Added Season Teams API
     1.0.5:
         1.Changed freeAPI informations
     1.0.4:
@@ -15,7 +19,6 @@ Changes List:
     1.0.3:
         1.Access key, secret key and app id can also be accessed through Environmental variables.
         2.Ball by ball API has been added to the API list.
-
     1.0.2:
        1.File Storage Handler approach has been added for the Authentication.
        2.Authentication process has to be generated for every session.

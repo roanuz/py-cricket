@@ -87,28 +87,30 @@ def test_rac_library(rca_app):
 
     testcase_logger.info("News Aggregation - " + \
                          str(rca_app.get_news_aggregation()['status']))
+    
+    testcase_logger.info("Season team - " + str(rca_app.get_season_team()['status']))
 
 
-print "-----------------------"
-print "Using RcaStorageHandler"
-print "-----------------------"
+print("-----------------------")
+print("Using RcaStorageHandler")
+print("-----------------------")
 
 # RcaStorageHandler(gets value from input)
 cache_handler = RcaStorageHandler()
-print "cache_handler", cache_handler
+print("cache_handler", cache_handler)
 rca_app = RcaApp(
-    access_key="access_key", \
-    secret_key="secret_key", \
-    app_id="app_id", \
+    access_key=os.environ.get("ACCESS_KEY") , \
+    secret_key=os.environ.get("SECRET_KEY"), \
+    app_id=os.environ.get("APP_ID"), \
     store_handler=cache_handler
 )
 
 test_rac_library(rca_app)
 
-print ""
-print "---------------------------"
-print "Using RcaFileStorageHandler"
-print "---------------------------"
+print("")
+print("---------------------------")
+print("Using RcaFileStorageHandler")
+print("---------------------------")
 
 # RcaFileStorageHandler(gets value from environmental variable)
 file_cache_handler = RcaFileStorageHandler()
@@ -116,6 +118,6 @@ rca_app = RcaApp(store_handler=file_cache_handler)
 
 test_rac_library(rca_app)
 
-print "------------------------"
-print "Done"
-print "------------------------"
+print("------------------------")
+print("Done")
+print("------------------------")
