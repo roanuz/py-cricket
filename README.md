@@ -45,19 +45,21 @@ py-cricket library for Python using Roanuz Cricket API's.  Easy to install and s
 
  ### List of Roanuz Cricket API
 
-* [Match API](https://www.cricketapi.com/docs/match_api/)  start.get_match("match_key")
-* [Ball by ball API](https://www.cricketapi.com/docs/ball_by_ball_api/) start.get_ball_by_ball("match_key", over_key="over_key")
-* [Recent Matches API](https://www.cricketapi.com/docs/recent_match_api/)  start.get_recent_matches()
-* [Player Stats API](https://www.cricketapi.com/docs/player_stats_api/)  start.get_player_stats("player_key", "league_or_board_key")
-* [Recent Season API](https://www.cricketapi.com/docs/recent_season_api/)  start.get_recent_seasons()
-* [Schedule API](https://www.cricketapi.com/docs/schedule_api/)  start.get_schedule()
-* [Season API](https://www.cricketapi.com/docs/season_api/)  start.get_season("season_key")
-* [Season Stats API](https://www.cricketapi.com/docs/season_stats_api/)  start.get_season_stats("season_key")
-* [Season Team API](https://www.cricketapi.com/docs/season_team_api/)  start.get_season_team("season_key", "season_team_key")
-* [Season Points API](https://www.cricketapi.com/docs/season_points_api/)  start.get_season_points("season_key")
-* [Season Player Stats API](https://www.cricketapi.com/docs/season_player_stats_api/)  start.get_season_player_stats("season_key", "player_key")
-* [Over Summary API](https://www.cricketapi.com/docs/over_summary_api/)  start.get_overs_summary("match_key")
-* [News Aggregation API](https://www.cricketapi.com/docs/news_aggregation_api/)  start.get_news_aggregation()
+* [Match API](https://www.cricketapi.com/docs/Core-API/Match-API/)  start.get_match("match_key")
+* [Ball by ball API](https://www.cricketapi.com/docs/Core-API/Ball-By-Ball-API/) start.get_ball_by_ball("match_key", over_key="over_key")
+* [Recent Matches API](https://www.cricketapi.com/docs/Core-API/Recent-Matches-API/)  start.get_recent_matches()
+* [Player Stats API](https://www.cricketapi.com/docs/Core-API/Player-Stats-API/)  start.get_player_stats("player_key", "league_or_board_key")
+* [Recent Season API](https://www.cricketapi.com/docs/Core-API/Recent-Seasons-API/)  start.get_recent_seasons()
+* [Schedule API](https://www.cricketapi.com/docs/Core-API/Schedule-API/)  start.get_schedule()
+* [Season API](https://www.cricketapi.com/docs/Core-API/Season-API/)  start.get_season("season_key")
+* [Season Stats API](https://www.cricketapi.com/docs/Core-API/Season-Stats-API/)  start.get_season_stats("season_key")
+* [Season Team API](https://www.cricketapi.com/docs/Core-API/Season-Team-API/)  start.get_season_team("season_key", "season_team_key")
+* [Season Points API](https://www.cricketapi.com/docs/Core-API/Season-Points-API/)  start.get_season_points("season_key")
+* [Season Player Stats API](https://www.cricketapi.com/docs/Core-API/Season-Player-Stats-API/)  start.get_season_player_stats("season_key", "player_key")
+* [Over Summary API](https://www.cricketapi.com/docs/Core-API/Overs-Summary-API/)  start.get_overs_summary("match_key")
+* [News Aggregation API](https://www.cricketapi.com/docs/Core-API/News-Aggregation-API/)  start.get_news_aggregation()
+* [Fantasy Match Credits API](https://www.cricketapi.com/docs/Fantasy/Fantasy-Match-Credit-API/)  start.get_fantasy_credits("match_key")
+* [Fantasy Match Points API](https://www.cricketapi.com/docs/Fantasy/Fantasy-Match-Points-API/)  start.get_fantasy_points("match_key")
 
  ## Roanuz Cricket API 
 	This Library uses the Roanuz Cricket API for fetching cricket scores and stats.

@@ -8,6 +8,10 @@ py-cricket library for Roanuz Cricket API
 
 Changes List:
 ---------------------------
+    1.0.9:
+        1.Added Fantasy points and Fantasy credits API
+    1.0.8:
+        1.Fixed Bugs
     1.0.7:
         1.Added Player Stats API
     1.0.6:
