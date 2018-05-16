@@ -76,6 +76,7 @@ class RcaApp():
             self.store_handler = RcaStorageHandler()
 
         self.api_path = "https://rest.cricketapi.com/rest/v2/"
+        self.api_path_v3 = "https://rest.cricketapi.com/rest/v3/"
         if device_id:
             new_id = device_id
         else:
@@ -384,4 +385,32 @@ class RcaApp():
 
         news_aggregation_url = self.api_path + "news_aggregation" + "/"
         response = self.get_response(news_aggregation_url)
+        return response
+    
+    def get_fantasy_credits(self, match_key):
+        """
+        Calling Fantasy Credit API
+
+        Arg:
+            match_key: key of the match
+        Return:
+            json data
+        """
+
+        fantasy_credit_url = self.api_path_v3 + "fantasy-match-credits/" + match_key + "/"
+        response = self.get_response(fantasy_credit_url)
+        return response
+
+    def get_fantasy_points(self, match_key):
+        """
+        Calling Fantasy Points API
+
+        Arg:
+            match_key: key of the match
+        Return:
+            json data
+        """
+
+        fantasy_points_url = self.api_path_v3 + "fantasy-match-points/" + match_key + "/"
+        response = self.get_response(fantasy_points_url)
         return response
