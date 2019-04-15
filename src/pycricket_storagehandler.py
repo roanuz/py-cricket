@@ -132,14 +132,14 @@ class RcaFileStorageHandler():
 
         Return : json data
         """
-        file_obj = open(self.file, 'a+')
+        file_obj = open(self.file, 'r')
         content = file_obj.read()
         file_obj.close()
         if content:
             content = json.loads(content)
             return content
         else:
-            return False
+            return {}
 
     def update_file(self, content):
         """
@@ -149,7 +149,7 @@ class RcaFileStorageHandler():
         Boolean True/False
         """
         updated_content = json.dumps(content)
-        file_obj = open(self.file, 'w')
+        file_obj = open(self.file, 'r+')
         file_obj.write(str(updated_content))
         file_obj.close()
         return True
