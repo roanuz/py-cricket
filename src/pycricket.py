@@ -19,7 +19,7 @@ import logging
 import os
 import json
 from datetime import datetime
-from src.pycricket_storagehandler import RcaFileStorageHandler, RcaStorageHandler
+from pycricket_storagehandler import RcaFileStorageHandler, RcaStorageHandler
 
 # To avoid request library waring uncomment below two line
 import requests.packages.urllib3
