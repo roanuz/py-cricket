@@ -78,6 +78,7 @@ class RcaApp():
 
         self.api_path = "https://rest.cricketapi.com/rest/v2/"
         self.api_path_v3 = "https://rest.cricketapi.com/rest/v3/"
+        self.api_path_v4 = "https://rest.cricketapi.com/rest/v4/"
         if device_id:
             new_id = device_id
         else:
@@ -175,12 +176,16 @@ class RcaApp():
         Arg:
            match_key: key of the match
            card_type: optional, default to full_card. Accepted values are 
-           micro_card, summary_card & full_card.
+           micro_card, summary_card & full_card. For MG101 coverage card_type must be passed as metric_101
         Return:
-           json data   
+           json data
+        Supported Metric Groups:
+            MG100, MG101 
         """
-
-        match_url = self.api_path + "match/" + match_key + "/"
+        base_path = self.api_path
+        if "." in match_key:
+            base_path = self.api_path_v4
+        match_url = base_path + "match/" + match_key + "/"
         params = {}
         params["card_type"] = card_type
         response = self.get_response(match_url, params)
@@ -195,6 +200,8 @@ class RcaApp():
            micro_card & summary_card.
         Return:
            json data
+        Supported Metric Groups:
+            MG100
         """
 
         recent_matches_url = self.api_path + "recent_matches/"
@@ -220,9 +227,10 @@ class RcaApp():
         """
         match_key: key of the match
         over_key : key of the over
-    
+        Supported Metric Groups:
+            MG100
         Return:
-           json data:    
+           json data:
         """
 
         if over_key:
@@ -240,9 +248,13 @@ class RcaApp():
            season_key: key of the season.
         Return:
            json date
+        Supported Metric Groups:
+            MG100, MG101
         """
-
-        season_recent_matches_url = self.api_path + "season/" + season_key + "/recent_matches/"
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
+        season_recent_matches_url = base_path + "season/" + season_key + "/recent_matches/"
         response = self.get_response(season_recent_matches_url)
         return response
 
@@ -252,6 +264,8 @@ class RcaApp():
 
         Return:
            json data
+        Supported Metric Groups:
+            MG100
         """
 
         recent_seasons_url = self.api_path + "recent_seasons/"
@@ -264,6 +278,8 @@ class RcaApp():
 
         Return:
            json data
+        Supported Metric Groups:
+            MG100
         """
 
         schedule_url = self.api_path + "schedule/"
@@ -281,9 +297,13 @@ class RcaApp():
            season_key: key of the season
         Return:
            json data
+        Supported Metric Groups:
+            MG100, MG101
         """
-
-        schedule_url = self.api_path + "season/" + season_key + "/schedule/"
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
+        schedule_url = base_path + "season/" + season_key + "/schedule/"
         response = self.get_response(schedule_url)
         return response
 
@@ -297,9 +317,13 @@ class RcaApp():
            micro_card & summary_card 
         Return:
            json data
+        Supported Metric Groups:
+            MG100, MG101
         """
-
-        season_url = self.api_path + "season/" + season_key + "/"
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
+        season_url = base_path + "season/" + season_key + "/"
         params = {}
         params["card_type"] = card_type
         response = self.get_response(season_url, params)
@@ -313,13 +337,17 @@ class RcaApp():
            season_key: key of the season
         Return:
            json data
+        Supported Metric Groups:
+            MG100, MG101
         """
-
-        season_stats_url = self.api_path + "season/" + season_key + "/stats/"
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
+        season_stats_url = base_path + "season/" + season_key + "/stats/"
         response = self.get_response(season_stats_url)
         return response
 
-    def get_season_team(self, season_key, season_team_key,stats_type=None):
+    def get_season_team(self, season_key, season_team_key, stats_type=None):
         """
         Calling Season teams API
 
@@ -327,9 +355,14 @@ class RcaApp():
             season_key: key of the season
         Return:
             json data
+        Supported Metric Groups:
+            MG100, MG101
         """
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
         params = {"stats_type": stats_type}
-        season_team_url = self.api_path + 'season/' +  season_key + '/team/' + season_team_key + '/'
+        season_team_url = base_path + 'season/' +  season_key + '/team/' + season_team_key + '/'
         response = self.get_response(season_team_url, params=params)
         return response
 
@@ -341,9 +374,14 @@ class RcaApp():
            season_key: key of the season
         Return:
            json data
+        Supported Metric Groups:
+            MG100, MG101
         """
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
 
-        season_points_url = self.api_path + "season/" + season_key + "/points/"
+        season_points_url = base_path + "season/" + season_key + "/points/"
         response = self.get_response(season_points_url)
         return response
 
@@ -356,9 +394,14 @@ class RcaApp():
            player_key: key of the player
         Return:
            json data
+        Supported Metric Groups:
+            MG100, MG101
         """
+        base_path = self.api_path
+        if "." in season_key:
+            base_path = self.api_path_v4
 
-        season_player_stats_url = self.api_path + "season/" + season_key + "/player/" + player_key + "/stats/"
+        season_player_stats_url = base_path + "season/" + season_key + "/player/" + player_key + "/stats/"
         response = self.get_response(season_player_stats_url)
         return response
 
@@ -370,6 +413,8 @@ class RcaApp():
            match_key: key of the match
         Return:
            json data
+        Supported Metric Groups:
+            MG100
         """
         overs_summary_url = self.api_path + "match/" + match_key + "/overs_summary/"
         response = self.get_response(overs_summary_url)
@@ -386,8 +431,8 @@ class RcaApp():
         news_aggregation_url = self.api_path + "news_aggregation" + "/"
         response = self.get_response(news_aggregation_url)
         return response
-    
-    def get_fantasy_credits(self, match_key):
+
+    def get_fantasy_credits(self, match_key, model_key=None):
         """
         Calling Fantasy Credit API
 
@@ -395,13 +440,20 @@ class RcaApp():
             match_key: key of the match
         Return:
             json data
+        Supported Metric Groups:
+            MG100, MG101
         """
-
-        fantasy_credit_url = self.api_path_v3 + "fantasy-match-credits/" + match_key + "/"
-        response = self.get_response(fantasy_credit_url)
+        base_path = self.api_path_v3
+        params = {}
+        if model_key:
+            params['model'] = model_key
+        if "." in match_key:
+            base_path = self.api_path_v4
+        fantasy_credit_url = base_path + "fantasy-match-credits/" + match_key + "/"
+        response = self.get_response(fantasy_credit_url, params)
         return response
 
-    def get_fantasy_points(self, match_key):
+    def get_fantasy_points(self, match_key, model_key=None):
         """
         Calling Fantasy Points API
 
@@ -409,8 +461,46 @@ class RcaApp():
             match_key: key of the match
         Return:
             json data
+        Supported Metric Groups:
+            MG100, MG101
+        """
+        params = {}
+        if model_key:
+            params['model'] = model_key
+        base_path = self.api_path_v3
+        if "." in match_key:
+            base_path = self.api_path_v4
+        fantasy_points_url = base_path + "fantasy-match-points/" + match_key + "/"
+        response = self.get_response(fantasy_points_url, params)
+        return response
+
+    def get_v4_coverage(self):
+        """
+        Calling the v4 Coverage API.
+
+        Return:
+           json data
+        Supported Metric Groups:
+            MG101
         """
 
-        fantasy_points_url = self.api_path_v3 + "fantasy-match-points/" + match_key + "/"
-        response = self.get_response(fantasy_points_url)
+        coverage_url = self.api_path_v4 + "coverage/"
+        response = self.get_response(coverage_url)
+        return response
+
+    def get_v4_board_schedule(self, board_key, month=None):
+        """
+        Calling the Board Schedule API.
+
+        Return:
+           json data
+        Supported Metric Groups:
+            MG101
+        """
+
+        schedule_url = self.api_path_v4 + "board/" + board_key + "/schedule/"
+        params = {}
+        if month:
+            params['month'] = month
+        response = self.get_response(schedule_url, params)
         return response
