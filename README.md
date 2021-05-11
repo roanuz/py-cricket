@@ -60,6 +60,8 @@ py-cricket library for Python using Roanuz Cricket API's.  Easy to install and s
 * [News Aggregation API](https://www.cricketapi.com/docs/Core-API/News-Aggregation-API/)  start.get_news_aggregation()
 * [Fantasy Match Credits API](https://www.cricketapi.com/docs/Fantasy/Fantasy-Match-Credit-API/)  start.get_fantasy_credits("match_key")
 * [Fantasy Match Points API](https://www.cricketapi.com/docs/Fantasy/Fantasy-Match-Points-API/)  start.get_fantasy_points("match_key")
+* [Coverage API](https://www.cricketapi.com/docs/Core-API/Coverage-API/)  start.get_v4_coverage()
+* [Board Schedule API](https://www.cricketapi.com/docs/Core-API/Schedule-API/)  start.get_v4_board_schedule("board_key")
 
  ## Roanuz Cricket API 
 	This Library uses the Roanuz Cricket API for fetching cricket scores and stats.
