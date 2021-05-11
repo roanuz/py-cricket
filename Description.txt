@@ -8,6 +8,10 @@ py-cricket library for Roanuz Cricket API
 
 Changes List:
 ---------------------------
+    1.0.11:
+        1. Added support for Metric Group 101 APIs
+    1.0.10:
+        1.Fixed issue in reading files in file storage handler
     1.0.9:
         1.Added Fantasy points and Fantasy credits API
     1.0.8:
